@@ -12,7 +12,10 @@ function startGame() {
 </script>
 
 <template lang="pug">
-game-stage(ref="stage")
+game-stage(
+  ref="stage"
+  @game-end="hasPanel = true"
+)
 
 .w-48.fixed.bg-white.p-4.top-12.left-12(v-if="hasPanel")
   button.btn.btn-primary(@click="startGame") 开始游戏

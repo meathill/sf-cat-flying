@@ -19,12 +19,31 @@ html, body, #app, #stage, .stage-bg {
 .stage-bg {
   background: url(/bg_day.png) repeat-x;
   background-size: auto 100%;
+  position: relative;
   width: 1000vw;
-  transition: transform var(--game-duration);
+  transition: transform var(--game-duration) linear;
 }
 
 .stage-bg.playing {
   transform: translateX(-900vw);
+}
+
+.pipe {
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  position: absolute;
+  width: 26px;
+  height: 160px;
+}
+
+.pipe-up {
+  background-image: url(/pipe_up.png);
+  bottom: 0;
+}
+
+.pipe-down {
+  background-image: url(/pipe_down.png);
+  top: 0;
 }
 
 #sf-cat {
