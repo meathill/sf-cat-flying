@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cat-y: 0;
+  --game-duration: 30s;
+}
+
+html, body, #app, #stage, .stage-bg {
+  height: 100%;
+}
+
+#stage {
+  position: relative;
+  overflow: hidden;
+}
+
+.stage-bg {
+  background: url(/bg_day.png) repeat-x;
+  background-size: auto 100%;
+  width: 1000vw;
+  transition: transform var(--game-duration);
+}
+
+.stage-bg.playing {
+  transform: translateX(-900vw);
+}
+
+#sf-cat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -2rem 0 0 -2rem;
+  pointer-events: none;
+  transform: scaleX(-1) translateY(var(--cat-y));
+  transition: all 0.5s ease-in-out;
+}
