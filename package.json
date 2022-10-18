@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "eventemitter3": "^4.0.7",
     "vue": "^3.2.37"
   },
   "devDependencies": {

@@ -17,6 +17,9 @@ game-stage(
   @game-end="hasPanel = true"
 )
 
-.w-48.fixed.bg-white.p-4.top-12.left-12(v-if="hasPanel")
-  button.btn.btn-primary(@click="startGame") 开始游戏
+.w-48.fixed.bg-white.p-4.top-12.flex.justify-center.items-center.shadow-lg.rounded(
+  v-if="hasPanel"
+  class="top-1/2 left-1/2 -ml-24"
+)
+  button.btn.btn-primary.btn-block(@click="startGame") 开始游戏
 </template>
