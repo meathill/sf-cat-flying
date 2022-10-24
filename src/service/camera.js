@@ -1,7 +1,7 @@
 const width = document.body.clientWidth;
 const height = document.body.clientHeight
 
-/* global cv */
+/* global cv, __Camera_Id__ */
 
 let canvasInput;
 let canvasInputCtx;
@@ -21,14 +21,22 @@ export async function startCamera() {
   const resolution =  {
     width: { exact: width },
     height: { exact: height },
+  };
+  // 开始时，如果你只有一个摄像头，可以把这里注释掉
+  if (__Camera_Id__) {
+    resolution.deviceId = __Camera_Id__;
+  } else {
+    resolution.video.facingMode = { exact: "user" };
   }
   return new Promise((resolve, reject) => {
-    navigator.mediaDevices.getUserMedia({video: resolution, audio: false})
+    navigator.mediaDevices.getUserMedia({
+      video: resolution, audio: false
+    })
       .then(function(s) {
         resolve(s);
       })
       .catch(function(err) {
-        console.log("An error occured! " + err);
+        console.log("An error occured! ", err.message);
       });
   });
 

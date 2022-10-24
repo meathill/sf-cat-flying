@@ -7,6 +7,7 @@ export const observer = new IntersectionObserver(
           bubbles: true,
           detail: {
             ratio: intersectionRatio,
+            isIntersecting,
           },
         });
         target.dispatchEvent(event);
