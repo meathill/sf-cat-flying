@@ -11,6 +11,7 @@
     <script>
       function opencvIsReady() {
         console.log('OpenCV.js is ready');
+        window.opencvIsReady = true;
       }
       var Module = {
         preRun: [function() {

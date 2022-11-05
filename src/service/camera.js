@@ -28,18 +28,11 @@ export async function startCamera() {
   } else {
     resolution.video.facingMode = { exact: "user" };
   }
-  return new Promise((resolve, reject) => {
-    navigator.mediaDevices.getUserMedia({
-      video: resolution, audio: false
-    })
-      .then(function(s) {
-        resolve(s);
-      })
-      .catch(function(err) {
-        console.log("An error occured! ", err.message);
-      });
-  });
 
+  return await navigator.mediaDevices.getUserMedia({
+    video: resolution,
+    audio: false
+  });
 }
 
 export function startVideoProcessing(_emitter, _video) {

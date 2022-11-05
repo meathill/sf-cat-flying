@@ -1,20 +1,26 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, toRefs, unref, watch} from "vue";
 import EventEmitter from 'eventemitter3';
 import {observer} from "../service/index.js";
 import {startCamera, startVideoProcessing} from "../service/camera.js";
 
 const emit = defineEmits(['game-over']);
+const props = defineProps({
+  cameraStream: {
+    type: MediaStream,
+    default: null,
+  }
+});
 
 let interval;
 let pipeCount = 0;
-let stream = null;
 let streaming = false;
 let catSize = 0;
 const centerY = document.body.clientHeight / 2;
 const emitter = new EventEmitter();
 const isStart = ref(false);
 const position = ref(0);
+const root = ref(null);
 const stageBackground = ref(null);
 const video = ref(null);
 const cat = ref(null);
@@ -22,6 +28,17 @@ const transform = ref(null);
 
 emitter.on('result', y => {
   position.value = y - document.body.clientHeight / 2 - catSize;
+});
+
+watch(() => props.cameraStream, stream => {
+  // opencv 处理
+  video.value.srcObject = stream;
+  if (stream) {
+    video.value.play();
+    root.value.removeEventListener('mousemove', onMouseMove);
+  } else {
+    root.value.addEventListener('mousemove', onMouseMove);
+  }
 });
 
 onMounted(() => {
@@ -40,6 +57,7 @@ function onHit(e) {
 function onMouseMove(e) {
   const {y} = e;
   position.value = y - centerY;
+  console.log('ooo', y);
 }
 function onVideoCanplay() {
   if (!streaming) {
@@ -70,11 +88,6 @@ function gameOver(isWin = false) {
 }
 
 async function startGame() {
-  // opencv 处理
-  stream = await startCamera();
-  video.value.srcObject = stream;
-  video.value.play();
-
   // 原始游戏处理
   transform.value = null;
   isStart.value = true;
@@ -102,7 +115,7 @@ export default {
 </script>
 
 <template lang="pug">
-#stage(:class="{'opacity-50': !isStart}")
+#stage(ref="root" :class="{'opacity-50': !isStart}" @mousemove="onMouseMove")
   .stage-bg(
     ref="stageBackground"
     :class="{playing: isStart && !transform}"

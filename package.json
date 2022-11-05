@@ -1,7 +1,7 @@
 {
   "name": "sf-cat",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,15 +10,15 @@
   },
   "dependencies": {
     "eventemitter3": "^4.0.7",
-    "vue": "^3.2.37"
+    "vue": "^3.2.41"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.1.0",
-    "autoprefixer": "^10.4.12",
-    "daisyui": "^2.31.0",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "autoprefixer": "^10.4.13",
+    "daisyui": "^2.38.0",
     "postcss": "^8.4.18",
     "pug": "^3.0.2",
-    "tailwindcss": "^3.1.8",
-    "vite": "^3.1.0"
+    "tailwindcss": "^3.2.2",
+    "vite": "^3.2.2"
   }
 }
